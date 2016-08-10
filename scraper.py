@@ -70,7 +70,9 @@ class Pinterest_Helper(object):
                                 results.append(u_to_s(src))
                     previmages = copy.copy(images)
                     final_results = list(set(final_results + results))
-                    images[0].send_keys(Keys.PAGE_DOWN)
+                    dummy = self.browser.find_element_by_tag_name('a')
+                    dummy.send_keys(Keys.PAGE_DOWN)
+                    # images[0].send_keys(Keys.PAGE_DOWN)
                     randdelay(0,1)
                     threshold -= 1
                 except (StaleElementReferenceException):
