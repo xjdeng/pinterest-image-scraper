@@ -16,10 +16,8 @@ class Pinterest_Helper(object):
     def __init__(self, login, pw):
         self.browser = webdriver.Firefox()
         self.browser.get("https://www.pinterest.com")
-        # emailElem = self.browser.find_element_by_id('userEmail')
-        emailElem = self.browser.find_element_by_name('email')
+        emailElem = self.browser.find_element_by_name('id')
         emailElem.send_keys(login)
-        # passwordElem = self.browser.find_element_by_id('userPassword')
         passwordElem = self.browser.find_element_by_name('password')
         passwordElem.send_keys(pw)
         passwordElem.send_keys(Keys.RETURN)
