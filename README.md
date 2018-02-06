@@ -22,6 +22,6 @@ images = s.runme("http://URL-to-image-board")
 ### Or if you have a CSV file with a URL to a different image board on every line:
 
 ```
-images = s.runme(imageboards.csv)
+images = ph.runme(imageboards.csv)
 ```
 
