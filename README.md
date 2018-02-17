@@ -17,7 +17,7 @@ git clone https://github.com/xjdeng/pinterest-image-scraper.git
 cd pinterest-image-scraper
 import scraper as s
 ph = s.Pinterest_Helper(<Pinterst login> , <Pinterest password>)
-images = s.runme("http://URL-to-image-board")
+images = ph.runme("http://URL-to-image-board")
 ```
 
 ### Or if you have a CSV file with a URL to a different image board on every line:
