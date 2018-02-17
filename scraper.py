@@ -2,8 +2,30 @@ from selenium import webdriver
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.keys import Keys
 import time,random,socket,unicodedata
-import string, copy
+import string, copy, os
 import pandas as pd
+import requests
+try:
+    from urlparse import urlparse
+except ImportError:
+    from six.moves.urllib.parse import urlparse
+
+def download(myinput, mydir = "./"):
+    if isinstance(myinput, str) or isinstance(myinput, bytes):
+        #http://automatetheboringstuff.com/chapter11/
+        res = requests.get(myinput)
+        res.raise_for_status()
+        #https://stackoverflow.com/questions/18727347/how-to-extract-a-filename-from-a-url-append-a-word-to-it
+        outfile = os.path.basename(urlparse(myinput).path)
+        playFile = open(outfile, 'wb')
+        for chunk in res.iter_content(100000):
+            playFile.write(chunk)
+    elif isinstance(myinput, list):
+        for i in myinput:
+            download(i, mydir)
+    else:
+        pass
+        
 
 def randdelay(a,b):
     time.sleep(random.uniform(a,b))
