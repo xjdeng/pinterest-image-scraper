@@ -4,9 +4,10 @@ Now you can take the URL to any Pinterest board (or a CSV of a bunch of boards) 
 
 ## Requirements:
 
-- Python 2.7
-- Pandas (pip install pandas)
-- Selenium (pip install selenium)
+- Python 2.7 or 3.5+ ([Anaconda](https://anaconda.org) recommended)
+- Pandas (pip install pandas or conda install pandas)
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/) + [Gecko driver](https://github.com/mozilla/geckodriver/releases)
+- Selenium (pip install selenium or conda install -c conda-forge selenium, then see [these instructions](https://pypi.python.org/pypi/selenium/3.9.0) for installing the Gecko driver)
 - A [Pinterest](http://www.pinterest.com) Account
 
 ## How to Run:
