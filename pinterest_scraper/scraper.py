@@ -35,8 +35,11 @@ def u_to_s(uni):
 
 class Pinterest_Helper(object):
     
-    def __init__(self, login, pw):
-        self.browser = webdriver.Firefox()
+    def __init__(self, login, pw, browser = None):
+        if browser is None:
+            self.browser = webdriver.Firefox()
+        else:
+            self.browser = browser
         self.browser.get("https://www.pinterest.com")
         emailElem = self.browser.find_element_by_name('id')
         emailElem.send_keys(login)
