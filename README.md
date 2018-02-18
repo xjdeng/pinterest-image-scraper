@@ -15,6 +15,9 @@ Now you can take the URL to any Pinterest board (or a CSV of a bunch of boards) 
 ```
 git clone https://github.com/xjdeng/pinterest-image-scraper.git
 cd pinterest-image-scraper
+pip install -U .
+cd ..
+python
 import scraper as s
 ph = s.Pinterest_Helper(<Pinterst login> , <Pinterest password>)
 images = ph.runme("http://URL-to-image-board")
