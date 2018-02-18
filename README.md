@@ -32,12 +32,12 @@ images = ph.runme(imageboards.csv)
 ### Now if you want to download these images:
 
 ```
-scraper.download(images, "/path/to/your/destination/dir")
+s.download(images, "/path/to/your/destination/dir")
 ```
 
 ### or to download to your current directory:
 
 ```
-scraper.download(images)
+s.download(images)
 ```
 
