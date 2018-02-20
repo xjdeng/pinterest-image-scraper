@@ -104,6 +104,8 @@ class Pinterest_Helper(object):
                     threshold -= 1
         except (socket.error, socket.timeout):
             pass
+        except KeyboardInterrupt:
+            return final_results
         return final_results
         
  
