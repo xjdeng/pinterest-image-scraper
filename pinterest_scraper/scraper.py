@@ -69,14 +69,14 @@ class Pinterest_Helper(object):
         return tmp2        
         
     
-    def runme(self,url, threshold = 500, persistence = 20):
+    def runme(self,url, threshold = 500, persistence = 120):
         final_results = []
         previmages = []
+        tries = 0
         try:
             self.browser.get(url)
             while threshold > 0:
                 try:
-                    tries = 0
                     results = []
                     images = self.browser.find_elements_by_tag_name("img")
                     if images == previmages:
