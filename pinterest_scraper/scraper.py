@@ -37,7 +37,10 @@ class Pinterest_Helper(object):
     
     def __init__(self, login, pw, browser = None):
         if browser is None:
-            self.browser = webdriver.Firefox()
+            #http://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/
+            profile = webdriver.FirefoxProfile()
+            profile.set_preference("permissions.default.image", 2)
+            self.browser = webdriver.Firefox(firefox_profile=profile)
         else:
             self.browser = browser
         self.browser.get("https://www.pinterest.com")
@@ -97,7 +100,7 @@ class Pinterest_Helper(object):
                     final_results = list(set(final_results + results))
                     dummy = self.browser.find_element_by_tag_name('a')
                     dummy.send_keys(Keys.PAGE_DOWN)
-                    randdelay(0,1)
+                    randdelay(1,2)
                     threshold -= 1
                 except (StaleElementReferenceException):
                     if debug == True:
