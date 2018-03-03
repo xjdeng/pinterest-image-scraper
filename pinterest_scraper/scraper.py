@@ -87,11 +87,11 @@ class Pinterest_Helper(object):
                     else:
                         tries = 0
                     if tries > persistence:
+                        if debug == True:
+                            print("Exitting: persistence exceeded")
                         return final_results
                     for i in images:
                         src = i.get_attribute("src")
-                        if debug == True:
-                            print(src)
                         if src:
                             if src.find("/236x/") != -1:
                                 src = src.replace("/236x/","/736x/")
@@ -107,9 +107,12 @@ class Pinterest_Helper(object):
                         print("StaleElementReferenceException")
                     threshold -= 1
         except (socket.error, socket.timeout):
-            pass
+            if debug == True:
+                print("Socket Error")
         except KeyboardInterrupt:
             return final_results
+        if debug == True:
+            print("Exitting at end")
         return final_results
         
  
