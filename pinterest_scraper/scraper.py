@@ -25,6 +25,9 @@ def download(myinput, mydir = "./"):
             download(i, mydir)
     else:
         pass
+
+def phantom_noimages():
+    return webdriver.PhantomJS(service_args=["--load-images=no"])
         
 
 def randdelay(a,b):
@@ -100,7 +103,7 @@ class Pinterest_Helper(object):
                     final_results = list(set(final_results + results))
                     dummy = self.browser.find_element_by_tag_name('a')
                     dummy.send_keys(Keys.PAGE_DOWN)
-                    randdelay(1,2)
+                    randdelay(0,1)
                     threshold -= 1
                 except (StaleElementReferenceException):
                     if debug == True:
