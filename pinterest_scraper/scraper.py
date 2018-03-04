@@ -27,7 +27,14 @@ def download(myinput, mydir = "./"):
         pass
 
 def phantom_noimages():
-    return webdriver.PhantomJS(service_args=["--load-images=no"])
+    from fake_useragent import UserAgent
+    from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+    ua = UserAgent()
+    #ua.update()
+    #https://stackoverflow.com/questions/29916054/change-user-agent-for-selenium-driver
+    caps = DesiredCapabilities.PHANTOMJS
+    caps["phantomjs.page.settings.userAgent"] = ua.random
+    return webdriver.PhantomJS(service_args=["--load-images=no"], desired_capabilities=caps)
         
 
 def randdelay(a,b):
@@ -121,6 +128,7 @@ class Pinterest_Helper(object):
     def runme_alt(self,url, threshold = 500, tol = 10, minwait = 1, maxwait = 2,debug = False):
         final_results = []
         heights = []
+        dwait = 0
         try:
             self.browser.get(url)
             while threshold > 0:
@@ -156,9 +164,14 @@ class Pinterest_Helper(object):
                     if debug == True:
                         print("StaleElementReferenceException")
                     threshold -= 1
-        except (socket.error, socket.timeout):
-            if debug == True:
-                print("Socket Error")
+                except (socket.error, socket.timeout):
+                    if debug == True:
+                        print("Socket Error. Waiting {} seconds.".format(str(dwait)))
+                        time.sleep(dwait)
+                        dwait += 1
+        #except (socket.error, socket.timeout):
+        #    if debug == True:
+        #        print("Socket Error")
         except KeyboardInterrupt:
             return final_results
         if debug == True:
