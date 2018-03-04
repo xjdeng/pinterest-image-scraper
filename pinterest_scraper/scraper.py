@@ -114,7 +114,50 @@ class Pinterest_Helper(object):
         if debug == True:
             print("Exitting at end")
         return final_results
-        
+
+    def runme_alt(self,url, threshold = 500, tol = 10, debug = False):
+        final_results = []
+        dheight = self.browser.execute_script("return window.screen.height")
+        heights = []
+        try:
+            self.browser.get(url)
+            while threshold > 0:
+                try:
+                    results = []
+                    images = self.browser.find_elements_by_tag_name("img")
+                    cur_height = self.browser.execute_script("return document.documentElement.scrollTop")
+                    page_height = self.browser.execute_script("return document.body.scrollHeight")
+                    heights.append(page_height)
+                    if debug == True:
+                        print("Current Height: " + str(cur_height))
+                        print("Page Height: " + str(page_height))
+                    if len(heights) > tol:
+                        if heights[tol:] == [heights[-1]]*tol:
+                            if debug == True:
+                                print("No more elements")
+                            return final_results
+                    for i in images:
+                        src = i.get_attribute("src")
+                        if src:
+                            if src.find("/236x/") != -1:
+                                src = src.replace("/236x/","/736x/")
+                                results.append(u_to_s(src))
+                    final_results = list(set(final_results + results))
+                    self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                    randdelay(1,2)
+                    threshold -= 1
+                except (StaleElementReferenceException):
+                    if debug == True:
+                        print("StaleElementReferenceException")
+                    threshold -= 1
+        except (socket.error, socket.timeout):
+            if debug == True:
+                print("Socket Error")
+        except KeyboardInterrupt:
+            return final_results
+        if debug == True:
+            print("Exitting at end")
+        return final_results        
  
     def scrape_old(self, url):
         results = []
