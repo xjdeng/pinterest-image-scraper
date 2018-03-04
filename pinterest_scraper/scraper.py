@@ -118,9 +118,8 @@ class Pinterest_Helper(object):
             print("Exitting at end")
         return final_results
 
-    def runme_alt(self,url, threshold = 500, tol = 10, debug = False):
+    def runme_alt(self,url, threshold = 500, tol = 10, minwait = 1, maxwait = 2,debug = False):
         final_results = []
-        dheight = self.browser.execute_script("return window.screen.height")
         heights = []
         try:
             self.browser.get(url)
@@ -130,15 +129,19 @@ class Pinterest_Helper(object):
                     images = self.browser.find_elements_by_tag_name("img")
                     cur_height = self.browser.execute_script("return document.documentElement.scrollTop")
                     page_height = self.browser.execute_script("return document.body.scrollHeight")
-                    heights.append(page_height)
+                    heights.append(int(page_height))
                     if debug == True:
                         print("Current Height: " + str(cur_height))
                         print("Page Height: " + str(page_height))
                     if len(heights) > tol:
-                        if heights[tol:] == [heights[-1]]*tol:
+                        if heights[-tol:] == [heights[-1]]*tol:
                             if debug == True:
                                 print("No more elements")
                             return final_results
+                        else:
+                            if debug == True:
+                                print("Min element: {}".format(str(min(heights[-tol:]))))
+                                print("Max element: {}".format(str(max(heights[-tol:]))))
                     for i in images:
                         src = i.get_attribute("src")
                         if src:
@@ -147,7 +150,7 @@ class Pinterest_Helper(object):
                                 results.append(u_to_s(src))
                     final_results = list(set(final_results + results))
                     self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                    randdelay(0,1)
+                    randdelay(minwait,maxwait)
                     threshold -= 1
                 except (StaleElementReferenceException):
                     if debug == True:
