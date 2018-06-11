@@ -18,7 +18,7 @@ cd pinterest-image-scraper
 pip install -U .
 cd ..
 python
-import scraper as s
+from pinterest_scraper import scraper as s
 ph = s.Pinterest_Helper(<Pinterst login> , <Pinterest password>)
 images = ph.runme("http://URL-to-image-board")
 ```
