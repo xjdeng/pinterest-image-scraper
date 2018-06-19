@@ -26,7 +26,7 @@ images = ph.runme("http://URL-to-image-board")
 ### Or if you have a CSV file with a URL to a different image board on every line:
 
 ```
-images = ph.runme(imageboards.csv)
+images = ph.getURLs(imageboards.csv)
 ```
 
 ### Now if you want to download these images:
