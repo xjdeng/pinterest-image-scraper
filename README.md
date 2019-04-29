@@ -4,7 +4,7 @@ Now you can take the URL to any Pinterest board (or a CSV of a bunch of boards) 
 
 ## Requirements:
 
-- Python 2.7 or 3.5+ ([Anaconda](https://anaconda.org) recommended)
+- Python 3.5+ ([Anaconda](https://anaconda.org) recommended)
 - Pandas (pip install pandas or conda install pandas)
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/) + [Gecko driver](https://github.com/mozilla/geckodriver/releases) (Firefox can be omitted if you know what you're doing and have another browser set up to be used via Selenium)
 - Selenium (```pip install selenium``` or ```conda install -c conda-forge selenium```, then see [these instructions](https://pypi.python.org/pypi/selenium/3.9.0) for installing the Gecko driver if not installing it from Conda)
@@ -48,6 +48,6 @@ Note: you no longer need Firefox.  If you'd like to use a different browser (i.e
 ```
 from selenium import webdriver
 chrome = webdriver.Chrome()
-ph = s.Pinterest_Helper(<Pinterst login> , <Pinterest password>, browser)
+ph = s.Pinterest_Helper(<Pinterst login> , <Pinterest password>, chrome)
 ```
 
